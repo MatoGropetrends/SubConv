@@ -11,7 +11,22 @@ from modules.convert.v import handleVShareLink
 import json
 import base64
 import urllib.parse as urlparse
-import distutils.util
+
+# 替代 distutils.util.strtobool 的函数
+def strtobool(val):
+    """Convert a string representation of truth to True or False.
+
+    True values are 'y', 'yes', 't', 'true', 'on', and '1'; false values
+    are 'n', 'no', 'f', 'false', 'off', and '0'.  Raises ValueError if
+    'val' is anything else.
+    """
+    val = val.lower() if val else ""
+    if val in ('y', 'yes', 't', 'true', 'on', '1'):
+        return True
+    elif val in ('n', 'no', 'f', 'false', 'off', '0'):
+        return False
+    else:
+        return False
 
 
 async def ConvertsV2Ray(buf):
@@ -69,7 +84,7 @@ async def ConvertsV2Ray(buf):
             hysteria["up"] = up
             hysteria["down"] = down
             hysteria["skip-cert-verify"] = bool(
-                distutils.util.strtobool(query.get("insecure")))
+                strtobool(query.get("insecure")))
 
             proxies.append(hysteria)
         elif scheme == "hysteria2" or scheme == "hy2":
@@ -101,7 +116,7 @@ async def ConvertsV2Ray(buf):
             if sni != "":
                 hysteria2["sni"] = sni
             hysteria2["skip-cert-verify"] = bool(
-                distutils.util.strtobool(query.get("insecure")))
+                strtobool(query.get("insecure")))
             alpn = get(query.get("alpn"))
             if alpn != "":
                 hysteria2["alpn"] = alpn.split(",")
@@ -174,7 +189,7 @@ async def ConvertsV2Ray(buf):
             trojan["password"] = urlTrojan.username
             trojan["udp"] = True
             trojan["skip-cert-verify"] = bool(
-                distutils.util.strtobool(query.get("allowInsecure")))
+                strtobool(query.get("allowInsecure")))
 
             sni = get(query.get("sni"))
             if sni != "":
