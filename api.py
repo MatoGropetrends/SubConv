@@ -57,8 +57,7 @@ if __name__ == "__main__":
     else:
         print("robots: Allow")
     module_name = __name__.split(".")[0]
-    import subprocess
-    subprocess.run(["uvicorn", f"{module_name}:app", "--host", args.host, "--port", str(args.port), "--workers", "4"])
+    uvicorn.run(f"{module_name}:app", host=args.host, port=args.port, workers=4)
 
 
 
