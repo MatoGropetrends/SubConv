@@ -189,6 +189,7 @@ async def sub(request: Request):
                 respText = (await client.get(url[i], headers={'User-Agent': 'v2rayn'})).text
                 content.append(await parse.parseSubs(respText))
                 url[i] = "{}provider?{}".format(request.base_url, urlencode({"url": url[i]}))
+    print("Content:", content)  # 打印content的内容
     if len(content) == 0:
         content = None
     if urlstandby:
