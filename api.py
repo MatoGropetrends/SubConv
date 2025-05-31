@@ -8,6 +8,10 @@ from fastapi.staticfiles import StaticFiles
 import uvicorn
 
 import httpx
+import logging
+
+# 设置httpx的日志级别为WARNING
+logging.getLogger("httpx").setLevel(logging.WARNING)
 
 import yaml
 
