@@ -298,6 +298,8 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
             ruleset_name, behavior = item[0].split("|")
         except ValueError:
             ruleset_name = item[0]
+        if behavior == "ipcidr":
+            name += "_ip"
         rule_map[name] = (ruleset_name, behavior)
         if url.startswith("[]"):
             continue
