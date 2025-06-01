@@ -302,7 +302,8 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
             ruleset_name, behavior = item[0].split("|")
         except ValueError:
             ruleset_name = item[0]
-        name += "_" + behavior
+        if behavior != "classical":
+            name += "_" + behavior
         rule_map[name] = (ruleset_name, behavior)
         if url.startswith("[]"):
             continue
