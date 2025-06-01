@@ -129,12 +129,12 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
 
     # add proxy groups
     for group in config.configInstance.CUSTOM_PROXY_GROUP:
-        type = group.type
+        rule_set_type = group.type
         regex = group.regex
 
         rule = group.rule
 
-        if type == "select" and rule:
+        if rule_set_type == "select" and rule:
             prior = group.prior
             if prior == "DIRECT":
                 proxyGroups["proxy-groups"].append({
@@ -170,11 +170,11 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
                     ]
                 })
 
-        elif type == "load-balance" or type == "select" or type == "fallback" or type == "url-test":
+        elif rule_set_type == "load-balance" or rule_set_type == "select" or rule_set_type == "fallback" or rule_set_type == "url-test":
             # init
             proxyGroup = {
                 "name": group.name,
-                "type": type
+                "type": rule_set_type
             }
             # add proxies
             if regex is not None:
@@ -237,16 +237,16 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
                     proxyGroups["proxy-groups"][0]["proxies"].remove(group.name)
                     proxyGroup = None
                 if proxyGroup is not None:
-                    if type == "load-balance":
+                    if rule_set_type == "load-balance":
                         proxyGroup["strategy"] = "consistent-hashing"
                         proxyGroup["url"] = config.configInstance.TEST_URL
                         proxyGroup["interval"] = 60
                         proxyGroup["tolerance"] = 50
-                    elif type == "fallback":
+                    elif rule_set_type == "fallback":
                         proxyGroup["url"] = config.configInstance.TEST_URL
                         proxyGroup["interval"] = 60
                         proxyGroup["tolerance"] = 50
-                    elif type == "url-test":
+                    elif rule_set_type == "url-test":
                         proxyGroup["url"] = config.configInstance.TEST_URL
                         proxyGroup["interval"] = 60
                         proxyGroup["tolerance"] = 50
@@ -282,20 +282,23 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
         "rule-providers": {}
     }
     rule_map = {}
-    classical = {
-        "type": "http",
-        "behavior": "classical",
-        "format": "text",
-        "interval": 86400 * 7,
-    }
     for item in config.configInstance.RULESET:
         url = item[1]
         # use filename
-        name = urlparse(url).path.split("/")[-1].split(".")[0]
+        name, suffix = urlparse(url).path.split("/")[-1].split(".")
         # unique name
         while name in rule_map:
             name += str(random.randint(0, 9))
-        rule_map[name] = item[0]
+        # 增加behavior支持：谷歌服务|classical，默认值为classical（ipcidr, domain)
+        behavior = "classical"
+        format = "text"
+        if suffix == "mrs":
+            format = "mrs"
+        try:
+            ruleset_name, behavior = item[0].split("|")
+        except ValueError:
+            ruleset_name = item[0]
+        rule_map[name] = ruleset_name
         if url.startswith("[]"):
             continue
         if notproxyrule is None:
@@ -303,7 +306,10 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
 
         rule_providers["rule-providers"].update({
             name: {
-                **classical,
+                "type": "http",
+                "behavior": behavior,
+                "format": format,
+                "interval": 86400 * 7,
                 "path": "./rule/{}.txt".format(name),
                 "url": url
             }
