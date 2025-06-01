@@ -19,20 +19,20 @@ template_default = {
             ],
             "nameserver-policy": {
                 "geosite:gfw,geolocation-!cn": [
-                    "https://1.1.1.1/dns-query#🚀 节点选择",
-                    "https://1.0.0.1/dns-query#🚀 节点选择",
-                    "https://8.8.8.8/dns-query#🚀 节点选择"
+                    "https://1.1.1.1/dns-query#节点选择",
+                    "https://1.0.0.1/dns-query#节点选择",
+                    "https://8.8.8.8/dns-query#节点选择"
                 ]
             },
             "nameserver": [
                 "https://dns.alidns.com/dns-query",
                 "https://doh.pub/dns-query",
-                "https://8.8.8.8/dns-query#🚀 节点选择"
+                "https://8.8.8.8/dns-query#节点选择"
             ],
             "fallback": [
-                "https://1.1.1.1/dns-query#🚀 节点选择",
-                "https://1.0.0.1/dns-query#🚀 节点选择",
-                "https://8.8.8.8/dns-query#🚀 节点选择"
+                "https://1.1.1.1/dns-query#节点选择",
+                "https://1.0.0.1/dns-query#节点选择",
+                "https://8.8.8.8/dns-query#节点选择"
             ],
             "fallback-filter": {
                 "geoip": False,
@@ -85,7 +85,7 @@ template_default = {
         ["📺 哔哩哔哩", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/Ruleset/Bilibili.list"],
         ["🌏 国内媒体", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ChinaMedia.list"],
         ["🌍 国外媒体", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ProxyMedia.list"],
-        ["🚀 节点选择", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ProxyGFWlist.list"],
+        ["节点选择", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ProxyGFWlist.list"],
         ["🎯 全球直连", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ChinaIp.list"],
         ["🎯 全球直连", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ChinaDomain.list"],
         ["🎯 全球直连", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ChinaCompanyIp.list"],
@@ -302,26 +302,26 @@ template_zju = {
             ],
             "nameserver-policy": {
                 "geosite:gfw,geolocation-!cn": [
-                    "https://1.1.1.1/dns-query#🚀 节点选择",
-                    "https://1.0.0.1/dns-query#🚀 节点选择",
-                    "https://8.8.8.8/dns-query#🚀 节点选择"
+                    "https://1.1.1.1/dns-query#节点选择",
+                    "https://1.0.0.1/dns-query#节点选择",
+                    "https://8.8.8.8/dns-query#节点选择"
                 ],
                 "+.zju.edu.cn": [
                     "10.10.0.21",
-                    "https://1.1.1.1/dns-query#🚀 节点选择",
-                    "https://1.0.0.1/dns-query#🚀 节点选择",
-                    "https://8.8.8.8/dns-query#🚀 节点选择"
+                    "https://1.1.1.1/dns-query#节点选择",
+                    "https://1.0.0.1/dns-query#节点选择",
+                    "https://8.8.8.8/dns-query#节点选择"
                 ]
             },
             "nameserver": [
                 "https://dns.alidns.com/dns-query",
                 "https://doh.pub/dns-query",
-                "https://8.8.8.8/dns-query#🚀 节点选择"
+                "https://8.8.8.8/dns-query#节点选择"
             ],
             "fallback": [
-                "https://1.1.1.1/dns-query#🚀 节点选择",
-                "https://1.0.0.1/dns-query#🚀 节点选择",
-                "https://8.8.8.8/dns-query#🚀 节点选择"
+                "https://1.1.1.1/dns-query#节点选择",
+                "https://1.0.0.1/dns-query#节点选择",
+                "https://8.8.8.8/dns-query#节点选择"
             ],
             "fallback-filter": {
                 "geoip": False,
@@ -378,7 +378,7 @@ template_zju = {
         ["📺 哔哩哔哩", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/Ruleset/Bilibili.list"],
         ["🌏 国内媒体", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ChinaMedia.list"],
         ["🌍 国外媒体", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ProxyMedia.list"],
-        ["🚀 节点选择", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ProxyGFWlist.list"],
+        ["节点选择", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ProxyGFWlist.list"],
         ["🎯 全球直连", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ChinaIp.list"],
         ["🎯 全球直连", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ChinaDomain.list"],
         ["🎯 全球直连", "https://raw.githubusercontent.com/SubConv/ZJU-Rule/main/Clash/ChinaCompanyIp.list"],

@@ -99,7 +99,7 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
     
     # add proxy select
     proxySelect = {
-        "name": "🚀 节点选择",
+        "name": "节点选择",
         "type": "select",
         "proxies": []
     }
@@ -143,7 +143,7 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
                     "proxies": [
                         "DIRECT",
                         "REJECT",
-                        "🚀 节点选择",
+                        "节点选择",
                         *[_group.name for _group in config.configInstance.CUSTOM_PROXY_GROUP if _group.rule == False]
                     ]
                 })
@@ -154,7 +154,7 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
                     "proxies": [
                         "REJECT",
                         "DIRECT",
-                        "🚀 节点选择",
+                        "节点选择",
                         *[_group.name for _group in config.configInstance.CUSTOM_PROXY_GROUP if _group.rule == False]
                     ]
                 })
@@ -163,7 +163,7 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
                     "name": group.name,
                     "type": "select",
                     "proxies": [
-                        "🚀 节点选择",
+                        "节点选择",
                         *[_group.name for _group in config.configInstance.CUSTOM_PROXY_GROUP if _group.rule == False],
                         "DIRECT",
                         "REJECT"
