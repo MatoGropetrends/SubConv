@@ -298,7 +298,7 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
             ruleset_name, behavior = item[0].split("|")
         except ValueError:
             ruleset_name = item[0]
-        rule_map[name] = ruleset_name
+        rule_map[name] = (ruleset_name, behavior)
         if url.startswith("[]"):
             continue
         if notproxyrule is None:
@@ -324,10 +324,16 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
         f"DOMAIN,{domain},DIRECT"
     )
     for k, v in rule_map.items():
+        ruleset_name, behavior = v
         if not k.startswith("[]"):
-            rules["rules"].append(
-                f"RULE-SET,{k},{v}"
-            )
+            if behavior == "ipcidr":
+                rules["rules"].append(
+                    f"RULE-SET,{k},{v},no-resolve"
+                )
+            else:
+                rules["rules"].append(
+                    f"RULE-SET,{k},{v}"
+                )
         elif k[2:] != "FINAL" and k[2:] != "MATCH":
             rules["rules"].append(
                 f"{k[2:]},{v}"
