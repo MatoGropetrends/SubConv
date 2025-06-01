@@ -302,8 +302,7 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
             ruleset_name, behavior = item[0].split("|")
         except ValueError:
             ruleset_name = item[0]
-        if behavior == "ipcidr":
-            name += "_ip"
+        name += "_" + behavior
         rule_map[name] = (ruleset_name, behavior)
         if url.startswith("[]"):
             continue
@@ -334,19 +333,19 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
         if not k.startswith("[]"):
             if behavior == "ipcidr":
                 rules["rules"].append(
-                    f"RULE-SET,{k},{v},no-resolve"
+                    f"RULE-SET,{k},{ruleset_name},no-resolve"
                 )
             else:
                 rules["rules"].append(
-                    f"RULE-SET,{k},{v}"
+                    f"RULE-SET,{k},{ruleset_name}"
                 )
         elif k[2:] != "FINAL" and k[2:] != "MATCH":
             rules["rules"].append(
-                f"{k[2:]},{v}"
+                f"{k[2:]},{ruleset_name}"
             )
         else:
             rules["rules"].append(
-                f"MATCH,{v}"
+                f"MATCH,{ruleset_name}"
             )
 
     result.update(rules)
