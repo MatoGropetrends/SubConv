@@ -5,4 +5,4 @@ test.py
 node_modules/
 docs/.vitepress/cache/
 dist/
-config_example/
+tmp/
