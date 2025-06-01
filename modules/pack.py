@@ -284,8 +284,12 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
     rule_map = {}
     for item in config.configInstance.RULESET:
         url = item[1]
+        suffix = "list"
         # use filename
-        name, suffix = urlparse(url).path.split("/")[-1].split(".")
+        try:
+            name, suffix = urlparse(url).path.split("/")[-1].split(".")
+        except ValueError:
+            name = urlparse(url).path.split("/")[-1].split(".")
         # unique name
         while name in rule_map:
             name += str(random.randint(0, 9))
