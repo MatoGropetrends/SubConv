@@ -27,8 +27,28 @@ HEAD:
     - 223.5.5.5
     - 119.29.29.29
 RULESET:
-- - 全球直连
-  - https://github.com/MetaCubeX/meta-rules-dat/blob/meta/geo-lite/geosite/cn.list
+- - 全球直连|domain
+  - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
+- - Apple|domain
+  - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs
+- - ChatGPT|domain
+  - https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs
+- - GitHub|domain
+  - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs
+- - YouTube|domain
+  - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs
+- - Google|domain
+  - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
+- - Telegram|domain
+  - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs
+- - 全球直连|domain
+  - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
+- - Google|ipcidr
+  - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs
+- - Telegram|ipcidr
+  - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs
+- - 全球直连|ipcidr
+  - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs
 - - 漏网之鱼
   - '[]FINAL'
 CUSTOM_PROXY_GROUP:
@@ -39,6 +59,24 @@ CUSTOM_PROXY_GROUP:
   type: select
   manual: true
   rule: false
+- name: Apple
+  type: select
+  prior: PROXY
+- name: ChatGPT
+  type: select
+  prior: PROXY
+- name: GitHub
+  type: select
+  prior: PROXY
+- name: YouTube
+  type: select
+  prior: PROXY
+- name: Google
+  type: select
+  prior: PROXY
+- name: Telegram
+  type: select
+  prior: PROXY
 - name: 全球直连
   type: select
   prior: DIRECT
