@@ -52,6 +52,10 @@ RULESET:
 - - 漏网之鱼
   - '[]FINAL'
 CUSTOM_PROXY_GROUP:
+- name: 套餐信息
+  type: select
+  rule: false
+  regex: 剩余|到期|续费
 - name: 自动选择
   type: url-test
   rule: false
