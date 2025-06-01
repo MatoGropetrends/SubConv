@@ -289,7 +289,7 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
         try:
             name, suffix = urlparse(url).path.split("/")[-1].split(".")
         except ValueError:
-            name = urlparse(url).path.split("/")[-1].split(".")
+            name = urlparse(url).path.split("/")[-1].split(".")[0]
         # unique name
         while name in rule_map:
             name += str(random.randint(0, 9))
