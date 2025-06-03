@@ -49,6 +49,8 @@ RULESET:
   - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs
 - - 全球直连|ipcidr
   - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs
+- - 全球直连
+  - '[]GEOIP,CN'
 - - 漏网之鱼
   - '[]FINAL'
 CUSTOM_PROXY_GROUP:
