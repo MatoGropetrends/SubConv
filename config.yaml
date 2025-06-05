@@ -33,6 +33,8 @@ RULESET:
   - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs
 - - ChatGPT|domain
   - https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs
+- - Netflix|domain
+  - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs
 - - GitHub|domain
   - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs
 - - YouTube|domain
@@ -73,6 +75,9 @@ CUSTOM_PROXY_GROUP:
   type: select
   prior: PROXY
 - name: ChatGPT
+  type: select
+  prior: PROXY
+- name: Netflix
   type: select
   prior: PROXY
 - name: GitHub
