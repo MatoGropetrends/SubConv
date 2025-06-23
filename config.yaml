@@ -29,8 +29,8 @@ HEAD:
 RULESET:
 - - 全球直连
   - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/custom-cn.list
-- - AdsPower
-  - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/adspower-proxies.list
+- - AdsPower|ipcidr
+  - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/adspower-proxies.mrs
 - - 全球直连|domain
   - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
 - - Apple|domain
