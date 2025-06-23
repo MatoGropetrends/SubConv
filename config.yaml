@@ -29,6 +29,10 @@ HEAD:
 RULESET:
 - - 全球直连
   - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/custom-cn.list
+- - Genflow
+  - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/genflow-server.list
+- - Anthropic
+  - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/anthropic.list
 - - AdsPower|ipcidr
   - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/adspower-proxies.mrs
 - - 全球直连|domain
@@ -75,6 +79,16 @@ CUSTOM_PROXY_GROUP:
   type: select
   manual: true
   rule: false
+- name: 手动切换-Genflow
+  type: select
+  manual: true
+  rule: false
+- name: Genflow
+  type: select
+  prior: PROXY
+- name: Anthropic
+  type: select
+  prior: PROXY
 - name: Apple
   type: select
   prior: PROXY
@@ -105,6 +119,10 @@ CUSTOM_PROXY_GROUP:
 - name: 漏网之鱼
   type: select
   prior: PROXY
+- name: 🤖 链式代理
+  type: select
+  rule: false
+  regex: ^(?!【仅海外用户】).*(链式代理)
 - name: 🇭🇰 香港节点
   type: select
   rule: false
