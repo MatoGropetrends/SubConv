@@ -29,6 +29,8 @@ HEAD:
 RULESET:
 - - 全球直连
   - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/custom-cn.list
+- - AdsPower
+  - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/adspower-proxies.list
 - - 全球直连|domain
   - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
 - - Apple|domain
@@ -77,6 +79,9 @@ CUSTOM_PROXY_GROUP:
   type: select
   prior: PROXY
 - name: ChatGPT
+  type: select
+  prior: PROXY
+- name: AdsPower
   type: select
   prior: PROXY
 - name: Netflix
