@@ -102,7 +102,12 @@ async def provider(request: Request):
     headers = {'Content-Type': 'text/yaml;charset=utf-8'}
     url = request.query_params.get("url")
     async with httpx.AsyncClient() as client:
-        resp = await client.get(url, headers={'User-Agent': 'v2rayn'})
+        resp = await client.get(url, headers={
+            'User-Agent': 'v2rayn',
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+        })
         if resp.status_code < 200 or resp.status_code >= 400:
             raise HTTPException(status_code=resp.status_code, detail=resp.text)
         result = await parse.parseSubs(resp.text)
