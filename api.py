@@ -14,6 +14,7 @@ import logging
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
 import yaml
+import time
 
 from urllib.parse import urlencode
 import argparse
@@ -101,13 +102,10 @@ async def robots():
 async def provider(request: Request):
     headers = {'Content-Type': 'text/yaml;charset=utf-8'}
     url = request.query_params.get("url")
+    # 添加时间戳参数避免缓存问题
+    url_with_ts = f"{url}?_={int(time.time())}"
     async with httpx.AsyncClient() as client:
-        resp = await client.get(url, headers={
-            'User-Agent': 'v2rayn',
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'Pragma': 'no-cache',
-            'Expires': '0'
-        })
+        resp = await client.get(url_with_ts, headers={'User-Agent': 'v2rayn'})
         if resp.status_code < 200 or resp.status_code >= 400:
             raise HTTPException(status_code=resp.status_code, detail=resp.text)
         result = await parse.parseSubs(resp.text)
