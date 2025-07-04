@@ -26,6 +26,7 @@ HEAD:
     nameserver:
     - 223.5.5.5
     - 119.29.29.29
+TEST_URL: https://www.gstatic.com/generate_204
 RULESET:
 - - 全球直连
   - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/custom-cn.list
@@ -123,6 +124,10 @@ CUSTOM_PROXY_GROUP:
   type: select
   rule: false
   regex: ^(?!【仅海外用户】).*(链式代理)
+- name: Genflow自动测速节点
+  type: url-test
+  rule: false
+  regex: ^(?!【仅海外用户】).*(日本|新加坡)
 - name: 🇭🇰 香港节点
   type: select
   rule: false
