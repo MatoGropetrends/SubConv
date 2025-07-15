@@ -123,7 +123,7 @@ async def sub(request: Request):
     if "interval" in args:
         interval = args["interval"]
     else:
-        interval = "1800"
+        interval = "86400"
 
     short = args.get("short")
 

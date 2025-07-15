@@ -30,7 +30,7 @@
 
                 <el-form-item label="更新间隔">
                     <el-input v-model="time" style="width: 100px" placeholder=""></el-input>
-                    秒，默认为1800
+                    秒，默认为86400
                 </el-form-item>
                 <el-form-item label="新订阅链接">
                     <el-input type="textarea" v-model="linkOutput" rows="2" resize="none"></el-input>
