@@ -82,7 +82,7 @@ const linkOutput = ref('')
 const time = ref('')
 const standby = ref('')
 const standby_switch = ref(false)
-const proxy_switch = ref(true)
+const proxy_switch = ref(false)
 
 // methods
 const submitForm = () => {
