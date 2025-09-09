@@ -80,6 +80,14 @@ CUSTOM_PROXY_GROUP:
   type: select
   manual: true
   rule: false
+- name: 手动切换-ChatGPT
+  type: select
+  manual: true
+  rule: false
+- name: 手动切换-Netflix
+  type: select
+  manual: true
+  rule: false
 - name: 手动切换-Genflow
   type: select
   manual: true
