@@ -30,6 +30,8 @@ TEST_URL: https://www.gstatic.com/generate_204
 RULESET:
 - - 全球直连
   - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/custom-cn.list
+- - Gemini
+  - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/gemini.list
 - - Genflow
   - https://raw.githubusercontent.com/MatoGropetrends/clash-custom-rules/refs/heads/main/genflow-server.list
 - - Anthropic
@@ -77,6 +79,10 @@ CUSTOM_PROXY_GROUP:
   manual: true
   rule: false
 - name: 手动切换2
+  type: select
+  manual: true
+  rule: false
+- name: 手动切换-Gemini
   type: select
   manual: true
   rule: false
