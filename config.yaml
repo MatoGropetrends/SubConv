@@ -98,6 +98,9 @@ CUSTOM_PROXY_GROUP:
   type: select
   manual: true
   rule: false
+- name: Gemini
+  type: select
+  prior: PROXY
 - name: Genflow
   type: select
   prior: PROXY
