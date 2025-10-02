@@ -18,7 +18,6 @@ HEAD:
     fake-ip-filter:
     - "+.msftconnecttest.com"
     - "+.msftncsi.com"
-    - "time.*.com"
     - "time1.cloud.tencent.com"
     - "*.lan"
     default-nameserver:
