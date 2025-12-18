@@ -132,8 +132,25 @@ async def sub(request: Request):
 
 
     # get the url of original subscription
-    url = args.get("url")
-    url = re.split(r"[|\n]", url)
+    def reconstruct_query_param(args, key, reserved_keys):
+        value = None
+        found = False
+        for k, v in args.items():
+            if k == key and not found:
+                value = v
+                found = True
+                continue
+            if found:
+                if k in reserved_keys:
+                    break
+                value += f"&{k}={v}"
+        return value
+
+    url = reconstruct_query_param(args, "url", {"interval", "short", "npr", "urlstandby"})
+    if url is None: # fallback or empty
+        url = args.get("url")
+
+    url = re.split(r"[|\n]", url) if url else []
     # remove empty lines
     tmp = list(filter(lambda x: x!="", url)) 
     url = []
@@ -149,7 +166,10 @@ async def sub(request: Request):
     if len(urlstandalone) == 0:
         urlstandalone = None
 
-    urlstandby = args.get("urlstandby")
+    urlstandby = reconstruct_query_param(args, "urlstandby", {"interval", "short", "npr", "url"})
+    if urlstandby is None:
+        urlstandby = args.get("urlstandby")
+    
     urlstandbystandalone = None
     if urlstandby:
         urlstandby = re.split(r"[|\n]", urlstandby)
