@@ -171,6 +171,67 @@ async def ConvertsV2Ray(buf):
                 tuic["udp-relay-mode"] = udpRelayMode
             proxies.append(tuic)
 
+        elif scheme == "anytls":
+            try:
+                urlAnyTLS = urlparse.urlparse(line)
+            except:
+                continue
+
+            query = dict(urlparse.parse_qsl(urlAnyTLS.query))
+
+            anytls = {}
+            anytls["name"] = uniqueName(
+                names, urlparse.unquote_plus(urlAnyTLS.fragment))
+            anytls["type"] = scheme
+            anytls["server"] = urlAnyTLS.hostname
+            anytls["port"] = urlAnyTLS.port
+            anytls["password"] = urlAnyTLS.username
+            anytls["udp"] = True
+
+            sni = get(query.get("sni"))
+            if sni == "":
+                sni = get(query.get("peer"))
+            if sni != "":
+                anytls["sni"] = sni
+
+            alpn = get(query.get("alpn"))
+            if alpn != "":
+                anytls["alpn"] = alpn.split(",")
+
+            anytls["skip-cert-verify"] = bool(
+                strtobool(query.get("insecure")))
+
+            fingerprint = get(query.get("fp"))
+            if fingerprint == "":
+                fingerprint = get(query.get("client-fingerprint"))
+            if fingerprint == "":
+                anytls["client-fingerprint"] = "chrome"
+            else:
+                anytls["client-fingerprint"] = fingerprint
+
+            idleSessionCheckInterval = get(query.get("idle-session-check-interval"))
+            if idleSessionCheckInterval != "":
+                try:
+                    anytls["idle-session-check-interval"] = int(idleSessionCheckInterval)
+                except:
+                    continue
+
+            idleSessionTimeout = get(query.get("idle-session-timeout"))
+            if idleSessionTimeout != "":
+                try:
+                    anytls["idle-session-timeout"] = int(idleSessionTimeout)
+                except:
+                    continue
+
+            minIdleSession = get(query.get("min-idle-session"))
+            if minIdleSession != "":
+                try:
+                    anytls["min-idle-session"] = int(minIdleSession)
+                except:
+                    continue
+
+            proxies.append(anytls)
+
         elif scheme == "trojan":
             try:
                 urlTrojan = urlparse.urlparse(line)

@@ -114,6 +114,46 @@ async def test_trojan_basic():
     assert p["sni"] == "example.com"
 
 @pytest.mark.asyncio
+async def test_anytls_basic():
+    """测试基本 AnyTLS 链接解析"""
+    link = "anytls://password@127.0.0.1:443?sni=example.com&insecure=1#anytls_basic"
+
+    proxies = await converter.ConvertsV2Ray(link)
+
+    assert len(proxies) == 1
+    p = proxies[0]
+    assert p["name"] == "anytls_basic"
+    assert p["type"] == "anytls"
+    assert p["server"] == "127.0.0.1"
+    assert p["port"] == 443
+    assert p["password"] == "password"
+    assert p["udp"] is True
+    assert p["sni"] == "example.com"
+    assert p["skip-cert-verify"] is True
+    assert p["client-fingerprint"] == "chrome"
+
+@pytest.mark.asyncio
+async def test_anytls_advanced_options():
+    """测试 AnyTLS 扩展参数"""
+    link = "anytls://password@127.0.0.1:8443?peer=example.com&alpn=h2,http/1.1&fp=firefox&idle-session-check-interval=40&idle-session-timeout=45&min-idle-session=2#anytls_advanced"
+
+    proxies = await converter.ConvertsV2Ray(link)
+
+    assert len(proxies) == 1
+    p = proxies[0]
+    assert p["name"] == "anytls_advanced"
+    assert p["type"] == "anytls"
+    assert p["server"] == "127.0.0.1"
+    assert p["port"] == 8443
+    assert p["password"] == "password"
+    assert p["sni"] == "example.com"
+    assert p["alpn"] == ["h2", "http/1.1"]
+    assert p["client-fingerprint"] == "firefox"
+    assert p["idle-session-check-interval"] == 40
+    assert p["idle-session-timeout"] == 45
+    assert p["min-idle-session"] == 2
+
+@pytest.mark.asyncio
 async def test_ss_sip002_format():
     """测试 Shadowsocks SIP002 格式 (Base64 userinfo)"""
     # method:password = aes-256-gcm:password -> YWVzLTI1Ni1nY206cGFzc3dvcmQ=
