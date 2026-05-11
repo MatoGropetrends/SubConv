@@ -177,7 +177,9 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
                 "type": rule_set_type
             }
             # add proxies
-            if regex is not None:
+            if group.proxy_groups:
+                proxyGroup["proxies"] = group.proxy_groups
+            elif regex is not None:
                 tmp = [regex]
                 if len(tmp) > 0:
                     providerProxies = []
@@ -236,20 +238,6 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
                 else:
                     proxyGroups["proxy-groups"][0]["proxies"].remove(group.name)
                     proxyGroup = None
-                if proxyGroup is not None:
-                    if rule_set_type == "load-balance":
-                        proxyGroup["strategy"] = "consistent-hashing"
-                        proxyGroup["url"] = config.configInstance.TEST_URL
-                        proxyGroup["interval"] = 60
-                        proxyGroup["tolerance"] = 50
-                    elif rule_set_type == "fallback":
-                        proxyGroup["url"] = config.configInstance.TEST_URL
-                        proxyGroup["interval"] = 60
-                        proxyGroup["tolerance"] = 50
-                    elif rule_set_type == "url-test":
-                        proxyGroup["url"] = config.configInstance.TEST_URL
-                        proxyGroup["interval"] = 60
-                        proxyGroup["tolerance"] = 50
             else:
                 if group.manual:
                     if standby:
@@ -261,6 +249,13 @@ async def pack(url: list, urlstandalone: list, urlstandby:list, urlstandbystanda
                         proxyGroup["use"] = subscriptions
                     if proxiesName:
                         proxyGroup["proxies"] = proxiesName
+            if proxyGroup is not None:
+                if rule_set_type == "load-balance":
+                    proxyGroup["strategy"] = "consistent-hashing"
+                if rule_set_type == "load-balance" or rule_set_type == "fallback" or rule_set_type == "url-test":
+                    proxyGroup["url"] = group.url or config.configInstance.TEST_URL
+                    proxyGroup["interval"] = group.interval or 60
+                    proxyGroup["tolerance"] = group.tolerance or 50
             if proxyGroup is not None:
                 proxyGroups["proxy-groups"].append(proxyGroup)
 

@@ -2,7 +2,7 @@ from typing import List, Tuple
 from pathlib import Path
 import sys
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from pydantic_settings_yaml import YamlBaseSettings
 from pydantic_settings import SettingsConfigDict, BaseSettings
 
@@ -15,6 +15,10 @@ class Group(BaseModel):
     manual: bool = False
     prior: str = None
     regex: str = None
+    proxy_groups: List[str] = Field(default_factory=list)
+    url: str = None
+    interval: int = None
+    tolerance: int = None
 
 class Config(YamlBaseSettings):
     HEAD: dict
